@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "../../modules/profile/Profile";
 
 function OnlineProfiles() {
     const [users, setUsers] = useState<User[]>([]);
-    const sse = new EventSource("http://localhost:3000/user/userUpdate");
+    // const sse = new EventSource("http://localhost:3000/user/userUpdate");
 
-    const wrapper = async () => {
-        const data = await fetch("http://localhost:3000/user").then((x) => x.json());
+    useEffect(() => {
+        const wrapper = async () => {
+            const data = await fetch("http://localhost:3000/user").then((x) => x.json());
 
-        setUsers(data);
-    };
-    wrapper();
-    sse.onmessage = (e) => {
-        setUsers(JSON.parse(e.data));
-    };
+            setUsers(data);
+        };
+        wrapper();
+    }, []);
+
+    // sse.onmessage = (e) => {
+    //     setUsers(JSON.parse(e.data));
+    // };
 
     return (
         <div>

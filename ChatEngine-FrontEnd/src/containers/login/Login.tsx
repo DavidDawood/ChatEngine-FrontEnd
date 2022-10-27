@@ -1,8 +1,23 @@
-import React, { useState } from "react";
-import { enterAccount } from "./login.service";
+import React, { useContext, useState } from "react";
+import { User } from "../../modules/profile/Profile";
+import { UserContext } from "../../session/SessionService";
+import { IUserContext } from "../../session/SessionService";
+import { enterAccount, Logout } from "./login.service";
 
 function Login() {
     const [username, setUsername] = useState("");
+    const { user, setUser } = useContext(UserContext) as IUserContext;
+
+    const buttonWrapperLogin = async () => {
+        if (username.length === 0) return;
+
+        await enterAccount(username)
+            .then((x) => setUser(x))
+            .catch(() => setUser({ id: -1 } as User));
+    };
+    const buttonWrapperLogout = async () => {
+        await Logout(user.id, user.identifier).then(() => setUser({ id: -1 } as User));
+    };
     return (
         <div>
             <textarea
@@ -15,7 +30,11 @@ function Login() {
                     setUsername(x.target.value);
                 }}
             />
-            <button onClick={() => enterAccount(username)}></button>
+            {user.id === -1 ? (
+                <button onClick={async () => buttonWrapperLogin()}>Login / Create</button>
+            ) : (
+                <button onClick={async () => buttonWrapperLogout()}>Logout</button>
+            )}
         </div>
     );
 }
