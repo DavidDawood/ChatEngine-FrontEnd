@@ -11,9 +11,13 @@ function Login() {
     const buttonWrapperLogin = async () => {
         if (username.length === 0) return;
 
-        await enterAccount(username)
-            .then((x) => setUser(x))
-            .catch(() => setUser({ id: -1 } as User));
+        try {
+            const logUser = await enterAccount(username);
+            setUser(logUser);
+        } catch (e) {
+            console.error(e);
+            setUser({ id: -1 } as User);
+        }
     };
     const buttonWrapperLogout = async () => {
         await Logout(user.id, user.identifier).then(() => setUser({ id: -1 } as User));

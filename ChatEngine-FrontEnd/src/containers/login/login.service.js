@@ -1,20 +1,10 @@
 export const enterAccount = async (username) => {
     const logUser = await fetch(`http://localhost:3000/user/login/${username}`, {
         method: "POST",
-    })
-        .then((x) => {
-            console.log("passed");
-            return x.json();
-        })
-        .catch((e) => {
-            console.log("Failed");
-        });
-    // neither of these are actually working, with and without the await keyword near fetch
+    }).then((x) => x.json());
     const { message } = logUser;
-    if (message)
-        return {
-            id: -1,
-        };
+
+    if (message) throw new Error(message);
 
     window.onbeforeunload = async () => Logout(logUser.id, logUser.identifier);
 
