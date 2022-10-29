@@ -8,22 +8,20 @@ import { useContext } from "react";
 import SessionService, { IUserContext, UserContext } from "./session/SessionService";
 
 function App() {
-    return SessionService(<Stuff />);
+    return SessionService(<Body />);
 }
 
-export function Stuff() {
+export function Body() {
     const { user } = useContext(UserContext) as IUserContext;
 
     return (
         <div className="App">
             <header className="App-header">
-                <p>{user.username}</p>
                 <Header />
                 <div>
                     <Chatroom />
                     <div>
                         <ChatHistory />
-                        <OnlineProfiles />
                     </div>
                 </div>
             </header>

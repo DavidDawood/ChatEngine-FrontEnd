@@ -1,9 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
 import { User } from "./modules/profile/Profile";
 
 export const UserContext = React.createContext<User | {}>({});
@@ -16,9 +15,7 @@ export const Contexter = ({ children }: any) => {
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <App />
     </React.StrictMode>,
 );
 
