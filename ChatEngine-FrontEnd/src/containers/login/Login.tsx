@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { User } from "../../modules/profile/Profile";
 import { UserContext } from "../../session/SessionService";
 import { IUserContext } from "../../session/SessionService";
@@ -8,12 +8,15 @@ import { enterAccount, Logout } from "./login.service";
 function Login() {
     const { user, setUser } = useContext(UserContext) as IUserContext;
 
-    const buttonWrapperLogout = async () => {
+    const buttonLogout = async () => {
         await Logout(user.id, user.identifier).then(() => setUser({ id: -1 } as User));
     };
-    const buttonWrapperLogin = async (user?: User) => {
+    const buttonLogin = async (user?: User) => {
+        console.log("first");
+        if (user === undefined) return;
         try {
-            if (!user) return;
+            console.log(user);
+
             const logUser = await enterAccount(user.username);
             setUser(logUser);
         } catch (e) {
@@ -26,12 +29,10 @@ function Login() {
             {user.id !== -1 ? (
                 <>
                     <p>Logged in user: {user.username}</p>
-                    <button onClick={async () => buttonWrapperLogout()}>Logout</button>
+                    <button onClick={async () => await buttonLogout()}>Logout</button>
                 </>
             ) : (
-                <>
-                    <OnlineProfiles logger={() => console.log("AAAAAAAA wanna goooo now")} />
-                </>
+                <OnlineProfiles onUserClick={buttonLogin} />
             )}
         </div>
     );

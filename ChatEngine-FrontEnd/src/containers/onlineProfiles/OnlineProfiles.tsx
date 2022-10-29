@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Profile, { User } from "../../modules/profile/Profile";
-import { enterAccount } from "../login/login.service";
 
-export type propsTypes = {
-    logger(): void;
+export type profileProps = {
+    user?: User;
+    onUserClick(user?: User): void;
 };
-function OnlineProfiles(myProps: propsTypes) {
+
+function OnlineProfiles(myProps: profileProps) {
     const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
         const wrapper = async () => {
             const data = await fetch("http://localhost:3000/user").then((x) => x.json());
-
             setUsers(data);
         };
         wrapper();
@@ -22,7 +22,7 @@ function OnlineProfiles(myProps: propsTypes) {
             <p>OnlineProfiles</p>
             <div>
                 {users.map((x, index) => (
-                    <Profile logger={() => myProps.logger()} key={index} />
+                    <Profile user={x} onUserClick={myProps.onUserClick} key={index} />
                 ))}
             </div>
         </div>

@@ -1,8 +1,4 @@
-import { type } from "os";
-import React, { useContext } from "react";
-import { propsTypes } from "../../containers/onlineProfiles/OnlineProfiles";
-import { UserContext } from "../../session/SessionService";
-
+import { profileProps } from "../../containers/onlineProfiles/OnlineProfiles";
 export interface User {
     id: number;
     isActive: number;
@@ -10,15 +6,15 @@ export interface User {
     identifier: number;
 }
 
-function Profile(prop: propsTypes) {
-    const { user } = useContext(UserContext);
-
+function Profile(prop: profileProps) {
     return (
-        <button onClick={() => prop.logger()}>
-            <div>
-                {/* {prop.userData.isActive === 1 ? <>active</> : <>inactive</>}
-                <p>{prop.userData.username}</p> */}
-            </div>
+        <button onClick={async () => await prop.onUserClick(prop.user)}>
+            {prop.user && (
+                <div>
+                    {prop.user.isActive === 1 ? <>active</> : <>inactive</>}
+                    <p>{prop.user.username}</p>
+                </div>
+            )}
         </button>
     );
 }
