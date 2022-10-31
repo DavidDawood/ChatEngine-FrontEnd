@@ -1,7 +1,15 @@
-import React from "react";
+type messageProp = {
+    message: string;
+    sentById: number;
 
-function Message() {
-    return <div>Message</div>;
+    id: number;
+};
+function Message(prop: messageProp) {
+    return (
+        <div>
+            {prop.id}|{prop.message}
+        </div>
+    );
 }
 
 export default Message;

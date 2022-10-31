@@ -5,13 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { User } from "./modules/profile/Profile";
 
-export const UserContext = React.createContext<User | {}>({});
-
-export const Contexter = ({ children }: any) => {
-    const [active, setActive] = useState(true);
-    return <UserContext.Provider value={{ active, setActive }}>{children}</UserContext.Provider>;
-};
-
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
     <React.StrictMode>

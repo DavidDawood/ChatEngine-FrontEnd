@@ -13,3 +13,7 @@ export const enterAccount = async (username) => {
 export const Logout = async (id, identifier) => {
     await fetch(`http://localhost:3000/user/logout/${id}/${identifier}`, { method: "POST" });
 };
+
+export const filterProfileStatus = (users, isOnline) => {
+    return users.filter((x) => x.isActive === isOnline);
+};
