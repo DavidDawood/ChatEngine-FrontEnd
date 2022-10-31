@@ -9,12 +9,21 @@ export interface ISession {
     otherUser: { username: string; id: number };
 }
 
-export const fetchFormattedSession = (previousChats: IFetchSession[], user: User): ISession[] => {
-    const newData = previousChats.map((x) => {
+export const fetchFormattedSessions = (fetchedSessions: IFetchSession[], user: User): ISession[] => {
+    const newData = fetchedSessions.map((x) => {
         return {
             id: x.id,
             otherUser: x.users.filter((y) => y.id !== user.id).at(0),
         } as ISession;
     });
+    return newData;
+};
+
+export const fetchFormattedSession = (fetchedSession: IFetchSession, user: User): ISession => {
+    const newData = {
+        id: fetchedSession.id,
+        otherUser: fetchedSession.users.filter((y) => y.id !== user.id).at(0),
+    } as ISession;
+
     return newData;
 };

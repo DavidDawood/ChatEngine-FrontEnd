@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { IUserContext, UserContext } from "../../globalServices/UserContextService";
 import { baseLink } from "../../globalServices/settings";
 import { ISessionContext, SessionContext } from "../../globalServices/SessionContextService";
-import { ISession, IFetchSession, fetchFormattedSession } from "./ChatHistory.service";
+import { ISession, IFetchSession, fetchFormattedSessions } from "./ChatHistory.service";
 
 function ChatHistory() {
     const { user } = useContext(UserContext) as IUserContext;
@@ -13,7 +13,7 @@ function ChatHistory() {
                 x.json(),
             )) as IFetchSession[];
 
-            setPrevChats(fetchFormattedSession(previousChats, user));
+            setPrevChats(fetchFormattedSessions(previousChats, user));
         };
         wrapper();
     }, [user]);

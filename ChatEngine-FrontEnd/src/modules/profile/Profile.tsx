@@ -8,11 +8,11 @@ export interface User {
 
 function Profile(prop: profileProps) {
     return (
-        <button onClick={async () => await prop.onUserClick(prop.user)}>
-            {prop.user && (
+        <button onClick={async () => await prop.onUserClick(prop.targetUser, prop.user)}>
+            {prop.targetUser && (
                 <div>
-                    {prop.user.isActive === 1 ? <>active</> : <>inactive</>}
-                    <p>{prop.user.username}</p>
+                    {prop.targetUser.isActive === 1 ? <>active</> : <>inactive</>}
+                    <p>{prop.targetUser.username}</p>
                 </div>
             )}
         </button>

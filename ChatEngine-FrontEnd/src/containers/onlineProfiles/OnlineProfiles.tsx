@@ -4,9 +4,10 @@ import { baseLink } from "../../globalServices/settings";
 import { IUserContext, UserContext } from "../../globalServices/UserContextService";
 
 export type profileProps = {
+    targetUser?: User;
     user?: User;
     filterIsActive?: boolean;
-    onUserClick(user?: User): void;
+    onUserClick(targetUser?: User, user?: User): void;
 };
 
 function OnlineProfiles(myProps: profileProps) {
@@ -18,7 +19,7 @@ function OnlineProfiles(myProps: profileProps) {
             const data = await fetch(baseLink + `user`).then((x) => x.json());
             setUsers(data);
         };
-        wrapper(); // eslint-disable-next-line
+        wrapper();
     }, []);
 
     const filterChoice = (): User[] => {
@@ -33,7 +34,7 @@ function OnlineProfiles(myProps: profileProps) {
             <p>OnlineProfiles</p>
             <div>
                 {filterChoice().map((x, index) => (
-                    <Profile user={x} onUserClick={myProps.onUserClick} key={index} />
+                    <Profile user={user} targetUser={x} onUserClick={myProps.onUserClick} key={index} />
                 ))}
             </div>
         </div>
