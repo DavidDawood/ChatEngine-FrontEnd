@@ -41,6 +41,9 @@ function Login() {
                         rows={1}
                         onChange={(e) => setText(e.target.value)}
                         placeholder={"Make a new name"}
+                        onKeyUp={(e) => {
+                            if (e.key === "Enter") buttonLogin({ username: text } as User);
+                        }}
                     />
                     <button onClick={() => buttonLogin({ username: text } as User)}>login</button>
                     <OnlineProfiles user={user} filterIsActive={false} onUserClick={buttonLogin} />
