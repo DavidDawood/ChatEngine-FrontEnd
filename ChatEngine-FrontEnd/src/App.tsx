@@ -19,12 +19,16 @@ export function Body() {
     const { user } = useContext(UserContext) as IUserContext;
     const { session, setSession } = useContext(SessionContext) as ISessionContext;
 
-    const TranslatedSession = async (targetUser: User, myUser: User) => {
-        const foundSession = (await fetch(baseLink + `session/${myUser.id}/${myUser.identifier}/${targetUser.id}`).then(
-            (x) => x.json(),
-        )) as IFetchSession;
-        const translatedSession = fetchFormattedSession(foundSession, myUser) as ISession;
-        setSession(translatedSession);
+    const JoinSession = async (targetUser: User, myUser: User) => {
+        try {
+            const foundSession = (await fetch(
+                baseLink + `session/${myUser.id}/${myUser.identifier}/${targetUser.id}`,
+            ).then((x) => x.json())) as IFetchSession;
+            const translatedSession = fetchFormattedSession(foundSession, myUser) as ISession;
+            setSession(translatedSession);
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     return (
@@ -36,7 +40,7 @@ export function Body() {
                         <>
                             {session.id !== -1 && <Chatroom />}
                             <div>
-                                <OnlineProfiles filterIsActive={true} user={user} onUserClick={TranslatedSession} />
+                                <OnlineProfiles filterIsActive={true} user={user} onUserClick={JoinSession} />
                                 <ChatHistory />
                             </div>
                         </>

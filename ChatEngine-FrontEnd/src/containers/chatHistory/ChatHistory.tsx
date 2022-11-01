@@ -7,13 +7,19 @@ import { ISession, IFetchSession, fetchFormattedSessions } from "./ChatHistory.s
 function ChatHistory() {
     const { user } = useContext(UserContext) as IUserContext;
     const [prevChats, setPrevChats] = useState<ISession[]>([]);
+
+    // upon updating with a new user, update all the previous chat sessions
     useEffect(() => {
         const wrapper = async () => {
-            const previousChats = (await fetch(baseLink + `session/user/${user.id}/${user.identifier}`).then((x) =>
-                x.json(),
-            )) as IFetchSession[];
-
-            setPrevChats(fetchFormattedSessions(previousChats, user));
+            try {
+                const previousChats = (await fetch(baseLink + `session/user/${user.id}/${user.identifier}`).then((x) =>
+                    x.json(),
+                )) as IFetchSession[];
+                setPrevChats(fetchFormattedSessions(previousChats, user));
+            } catch {
+                console.error("no sessions found");
+                setPrevChats([]);
+            }
         };
         wrapper();
     }, [user]);

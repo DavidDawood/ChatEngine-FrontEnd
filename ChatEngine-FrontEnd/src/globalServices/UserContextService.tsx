@@ -6,6 +6,7 @@ export interface IUserContext {
     setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
+// context to allow for global user access
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export function UserContextService(children: any) {

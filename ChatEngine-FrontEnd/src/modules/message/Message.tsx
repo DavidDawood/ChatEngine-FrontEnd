@@ -1,15 +1,24 @@
 type messageProp = {
     message: string;
-    sentById: number;
-
-    id: number;
+    sentByUsername: string;
 };
+export interface IMessage {
+    message: string;
+    sentByID: number;
+    timeSent: Date;
+}
+export interface IMessageDTO {
+    message: string;
+    userID: number;
+    identifier: number;
+    sessionID: number;
+}
+
 function Message(prop: messageProp) {
     return (
         <div>
-            {prop.id}|{prop.message}
+            {prop.sentByUsername}|{prop.message}
         </div>
     );
 }
-
 export default Message;
