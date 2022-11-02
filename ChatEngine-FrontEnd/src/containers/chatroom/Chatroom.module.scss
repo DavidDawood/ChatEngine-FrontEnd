@@ -1,0 +1,61 @@
+@use "../../partials/module";
+@import "../../partials/palette";
+
+.container {
+    width: 90vw;
+    margin: auto;
+    overflow-y: hidden;
+    ::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+    }
+    &__textField {
+        resize: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+        background-color: $darkBackgroundColor;
+        @extend %smallBorder;
+
+        margin: auto;
+
+        & > * {
+            text-align: center;
+            font-size: calc(0.85vw + 2vh);
+            border-radius: 5px;
+            background-color: $darkBackgroundColor;
+            color: $primaryTextColor;
+            @extend %smallBorder;
+        }
+        & > button {
+            &:hover {
+                @extend %hover;
+            }
+        }
+
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        resize: none;
+        width: 70%;
+        outline: none;
+
+        &:hover {
+            cursor: text;
+            @extend %hover;
+        }
+    }
+    &__messages {
+        margin: auto;
+        width: 40%;
+        @extend %border;
+        scrollbar-width: 0px;
+        max-height: 300px;
+        padding-bottom: 180px;
+        overflow-y: scroll;
+        margin-bottom: 30px;
+        background-color: $darkBackgroundColor;
+    }
+}

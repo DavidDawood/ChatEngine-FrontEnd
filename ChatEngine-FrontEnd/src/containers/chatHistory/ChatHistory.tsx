@@ -3,6 +3,7 @@ import { IUserContext, UserContext } from "../../globalServices/UserContextServi
 import { baseLink } from "../../globalServices/settings";
 import { ISessionContext, SessionContext } from "../../globalServices/SessionContextService";
 import { ISession, IFetchSession, fetchFormattedSessions } from "./ChatHistory.service";
+import styles from "./ChatHistory.module.scss";
 
 function ChatHistory() {
     const { user } = useContext(UserContext) as IUserContext;
@@ -25,7 +26,6 @@ function ChatHistory() {
     }, [user]);
     return (
         <div>
-            <p>List of previous chats:</p>
             {prevChats.map((x, index) => {
                 return <Session key={index} session={x} />;
             })}
@@ -40,10 +40,8 @@ function Session(myProps: sessionProp) {
     const { setSession } = useContext(SessionContext) as ISessionContext;
 
     return (
-        <button onClick={() => setSession(myProps.session)}>
-            <h2>
-                {myProps.session.id} {myProps.session.otherUser.username}
-            </h2>
+        <button className={styles.container__session} onClick={() => setSession(myProps.session)}>
+            <p>{myProps.session.otherUser.username}</p>
         </button>
     );
 }

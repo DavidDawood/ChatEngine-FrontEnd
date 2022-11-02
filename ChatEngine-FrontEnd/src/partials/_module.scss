@@ -1,0 +1,32 @@
+@import "../partials/palette";
+%border {
+    margin: 20px;
+    padding: 30px;
+    border: double 10px $decalColor;
+    border-radius: 30px;
+}
+%smallBorder {
+    margin: 5px;
+    border: solid 3px $decalColor;
+    border-radius: 5px;
+    background-color: $darkBackgroundColor;
+}
+
+%hover {
+    cursor: pointer;
+    box-shadow: 0px 5px 10px 5px $darkBackgroundColor;
+}
+%button {
+    text-align: center;
+    width: 120px;
+    height: 100px;
+    @extend %smallBorder;
+
+    font-size: calc(0.1vw + 2vh);
+    background-color: $darkBackgroundColor;
+    color: $primaryTextColor;
+
+    &:hover {
+        @extend %hover;
+    }
+}

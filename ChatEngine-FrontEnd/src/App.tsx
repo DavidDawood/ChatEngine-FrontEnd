@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.scss";
 
 import Header from "./containers/header";
 import ChatHistory from "./containers/chatHistory";
@@ -32,21 +32,21 @@ export function Body() {
     };
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <Header />
-                <div>
-                    {user.id !== -1 && (
-                        <>
-                            {session.id !== -1 && <Chatroom />}
-                            <div>
-                                <OnlineProfiles filterIsActive={true} user={user} onUserClick={JoinSession} />
-                                <ChatHistory />
-                            </div>
-                        </>
-                    )}
-                </div>
-            </header>
+        <div className={styles.container}>
+            <Header />
+            <div>
+                {user.id !== -1 && (
+                    <>
+                        {session.id !== -1 && <Chatroom />}
+                        <div className={styles.container__session}>
+                            <h3>Online Users</h3>
+                            <OnlineProfiles filterIsActive={true} user={user} onUserClick={JoinSession} />
+                            <h3>Previous Sessions</h3>
+                            <ChatHistory />
+                        </div>
+                    </>
+                )}
+            </div>
         </div>
     );
 }

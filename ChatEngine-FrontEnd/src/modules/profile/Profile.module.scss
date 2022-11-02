@@ -1,0 +1,23 @@
+@use "../../partials/module";
+@import "../../partials/palette";
+
+.container {
+    width: 120px;
+    height: 100px;
+    @extend %smallBorder;
+    background-color: $darkBackgroundColor;
+    &:hover {
+        @extend %hover;
+    }
+
+    & > p {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-wrap: break-word;
+        font-family: $secondaryTextFont;
+        font-size: calc(0.1vw + 2vh);
+        color: $primaryTextColor;
+        cursor: pointer;
+    }
+}

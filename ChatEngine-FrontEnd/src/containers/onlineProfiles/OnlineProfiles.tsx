@@ -31,12 +31,9 @@ function OnlineProfiles(myProps: profileProps) {
 
     return (
         <div>
-            <p>OnlineProfiles</p>
-            <div>
-                {filterChoice().map((x, index) => (
-                    <Profile user={user} targetUser={x} onUserClick={myProps.onUserClick} key={index} />
-                ))}
-            </div>
+            {filterChoice().map((x, index) => (
+                <Profile user={user} targetUser={x} onUserClick={myProps.onUserClick} key={index} />
+            ))}
         </div>
     );
 }

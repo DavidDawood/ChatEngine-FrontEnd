@@ -1,3 +1,4 @@
+import styles from "./Message.module.scss";
 type messageProp = {
     message: string;
     sentByUsername: string;
@@ -16,9 +17,13 @@ export interface IMessageDTO {
 
 function Message(prop: messageProp) {
     return (
-        <div>
-            {prop.sentByUsername}|{prop.message}
-        </div>
+        <>
+            <p>---</p>
+
+            <p className={styles.container}>
+                {prop.sentByUsername} | {prop.message}
+            </p>
+        </>
     );
 }
 export default Message;

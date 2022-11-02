@@ -1,4 +1,5 @@
 import { profileProps } from "../../containers/onlineProfiles/OnlineProfiles";
+import styles from "./Profile.module.scss";
 export interface User {
     id: number;
     isActive: number;
@@ -8,13 +9,8 @@ export interface User {
 
 function Profile(prop: profileProps) {
     return (
-        <button onClick={async () => await prop.onUserClick(prop.targetUser, prop.user)}>
-            {prop.targetUser && (
-                <div>
-                    {prop.targetUser.isActive === 1 ? <>active</> : <>inactive</>}
-                    <p>{prop.targetUser.username}</p>
-                </div>
-            )}
+        <button className={styles.container} onClick={async () => await prop.onUserClick(prop.targetUser, prop.user)}>
+            {prop.targetUser && <p>{prop.targetUser.username}</p>}
         </button>
     );
 }

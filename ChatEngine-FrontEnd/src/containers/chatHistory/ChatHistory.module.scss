@@ -1,0 +1,8 @@
+@use "../../partials/module";
+@import "../../partials/palette";
+.container {
+    &__session {
+        @extend %button;
+        font-family: $secondaryTextFont;
+    }
+}
